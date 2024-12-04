@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CleanArch.Infrastutura.Repositories
 {
-    internal class MembroRepositorio : IMembroRepositorio
+    public class MembroRepositorio : IMembroRepositorio
     {
         protected readonly AppDbContext _db;
 
