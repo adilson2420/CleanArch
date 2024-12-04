@@ -4,10 +4,12 @@ namespace CleanArch.Dominio.Abstracoes
 {
     public interface IMembroRepositorio
     {
-        Task<IEnumerable<Membro>> BuscarTodos();
+        Task<IEnumerable<Membro>> BuscarMembros();
         Task<Membro> BuscarMembroPorId(int idMembro);
         Task<Membro> AdicionarMembro(Membro membro);
-        Task<Membro> Atualizar(Membro membro);
-        Task Eliminar(Membro membro);
+        void Atualizar(Membro membro);
+        Task<Membro> EliminarMembro(int idMembro);
     }
 }
+
+
