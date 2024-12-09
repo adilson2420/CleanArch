@@ -16,7 +16,7 @@ namespace CleanArch.Infrastutura.EntityConfiguration
 
             builder.HasData(
                 new Membro(1, "Adilson", "adilson@gmail.com", 'M', true),
-                new Membro(1, "Clara", "clara@gmail.com", 'F', true)
+                new Membro(2, "Clara", "clara@gmail.com", 'F', true)
                 );
         }
     }
