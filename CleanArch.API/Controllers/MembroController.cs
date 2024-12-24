@@ -1,5 +1,7 @@
-﻿using CleanArch.Dominio.Abstracoes;
+﻿using CleanArch.Aplicacao.Membros.Comandos;
+using CleanArch.Dominio.Abstracoes;
 using CleanArch.Dominio.Entidades;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,10 +13,12 @@ namespace CleanArch.API.Controllers
     {
 
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMediator _mediator;
 
-        public MembroController(IUnitOfWork unitOfWork)
+        public MembroController(IUnitOfWork unitOfWork, IMediator mediator)
         {
             _unitOfWork = unitOfWork;
+            _mediator = mediator;
         }
 
         [HttpGet] // consulta
@@ -25,17 +29,17 @@ namespace CleanArch.API.Controllers
         }
 
         [HttpGet("idMembro")] // consulta
-        public async Task<IActionResult> TodosMembros(int idMembro)
+        public async Task<IActionResult> MembroPorId(int idMembro)
         {
             var membro = await _unitOfWork.MembroRepositorio.BuscarMembroPorId(idMembro);
             return Ok(membro);
         }
 
         [HttpPost] // comando
-        public async Task<IActionResult> AdicionarMembro([FromBody] Membro membro)
+        public async Task<IActionResult> AdicionarMembro(CriarMembroComando comando)
         {
-            var resposta = await _unitOfWork.MembroRepositorio.AdicionarMembro(membro);
-            return Ok(resposta);
+            var criarMembro = await _mediator.Send(comando);
+            return CreatedAtAction(nameof(MembroPorId), new { id = criarMembro.Id }, criarMembro);
         }
     }
 }
