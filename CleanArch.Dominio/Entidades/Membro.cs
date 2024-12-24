@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CleanArch.Dominio.Entidades
 {
-    public sealed class Membro : EntidadeBase
+    public class Membro : EntidadeBase
     {
         public string Nome { get; private set; }
         public string Email { get; private set; }

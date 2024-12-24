@@ -5,12 +5,8 @@ using MediatR;
 
 namespace CleanArch.Aplicacao.Membros.Comandos
 {
-    public class CriarMembroComando : IRequest<Membro>
+    public class CriarMembroComando : MembroComandoBase
     {
-        public string? Nome { get; private set; }
-        public string? Email { get; private set; }
-        public char Sexo { get; private set; }
-        public bool Activo { get; private set; }
     }
 }
 public class CriarMembroComandoHandler : IRequestHandler<CriarMembroComando, Membro>
