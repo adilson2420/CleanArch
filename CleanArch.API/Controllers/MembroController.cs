@@ -1,4 +1,5 @@
 ﻿using CleanArch.Aplicacao.Membros.Comandos;
+using CleanArch.Aplicacao.Membros.Queries;
 using CleanArch.Dominio.Abstracoes;
 using CleanArch.Dominio.Entidades;
 using MediatR;
@@ -12,27 +13,27 @@ namespace CleanArch.API.Controllers
     public class MembroController : ControllerBase
     {
 
-        private readonly IUnitOfWork _unitOfWork;
         private readonly IMediator _mediator;
 
         public MembroController(IUnitOfWork unitOfWork, IMediator mediator)
         {
-            _unitOfWork = unitOfWork;
             _mediator = mediator;
         }
 
         [HttpGet] // consulta
         public async Task<IActionResult> TodosMembros()
         {
-            var membros = await _unitOfWork.MembroRepositorio.BuscarMembros();
+            var query = new GetmembrosQuery();
+            var membros = await _mediator.Send(query);
             return Ok(membros);
         }
 
         [HttpGet("idMembro")] // consulta
         public async Task<IActionResult> MembroPorId(int idMembro)
         {
-            var membro = await _unitOfWork.MembroRepositorio.BuscarMembroPorId(idMembro);
-            return Ok(membro);
+            var query = new GetmembrosQuery();
+            var membros = await _mediator.Send(query);
+            return Ok(membros);
         }
 
         [HttpPost] // comando
@@ -43,3 +44,5 @@ namespace CleanArch.API.Controllers
         }
     }
 }
+
+// Realizar a implementação do update delete e consulta por ID, sem conexao com a internet. 
