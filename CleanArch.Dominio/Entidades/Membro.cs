@@ -29,7 +29,7 @@ namespace CleanArch.Dominio.Entidades
 
 
 
-        private void Atualizar(string nome, string email, char sexo, bool activo)
+        public void Atualizar(string nome, string email, char sexo, bool activo)
         {
             ValidacaoMembro(nome, email, sexo, activo);
         }

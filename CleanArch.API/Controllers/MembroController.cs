@@ -31,9 +31,12 @@ namespace CleanArch.API.Controllers
         [HttpGet("idMembro")] // consulta
         public async Task<IActionResult> MembroPorId(int idMembro)
         {
-            var query = new GetmembrosQuery();
-            var membros = await _mediator.Send(query);
-            return Ok(membros);
+            var query = new GetmembroPorIdQuery()
+            {
+                Id = idMembro
+            };
+            var membro = await _mediator.Send(query);
+            return Ok(membro);
         }
 
         [HttpPost] // comando
@@ -41,6 +44,12 @@ namespace CleanArch.API.Controllers
         {
             var criarMembro = await _mediator.Send(comando);
             return CreatedAtAction(nameof(MembroPorId), new { id = criarMembro.Id }, criarMembro);
+        }
+        [HttpPut] // comando
+        public async Task<IActionResult> AtualizarMembro(AtualizarMembroComando comando)
+        {
+            var membro = await _mediator.Send(comando);
+            return membro != null ? Ok(membro) : BadRequest("membro inválido");
         }
     }
 }

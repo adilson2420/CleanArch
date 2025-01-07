@@ -20,8 +20,9 @@ namespace CleanArch.Infrastutura.Repositories
 
         public async Task<Membro> MembroPorId(int id)
         {
-            string query = "SELECT * FROM Membros";
-            return await _dbConnection.QueryFirstOrDefaultAsync<Membro>(query, new { Id = id });
+            string query = "SELECT * FROM Membros where Id=@id";
+            var membro = await _dbConnection.QueryFirstOrDefaultAsync<Membro>(query, new { Id = id });
+            return membro;
         }
 
         public async Task<IEnumerable<Membro>> Membros()
