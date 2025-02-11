@@ -24,8 +24,16 @@ namespace CleanArch.API.Controllers
         public async Task<IActionResult> TodosMembros()
         {
             var query = new GetmembrosQuery();
-            var membros = await _mediator.Send(query);
-            return Ok(membros);
+            try
+            {
+                var membros = await _mediator.Send(query);
+                return Ok(membros);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("idMembro")] // consulta

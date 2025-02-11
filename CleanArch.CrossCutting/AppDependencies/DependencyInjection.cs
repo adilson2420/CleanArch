@@ -20,7 +20,7 @@ namespace CleanArch.CrossCutting.AppDependencies
             var passowrd = configuration["Password"] ?? "DOCk126#";
             var database = configuration["Database"] ?? "Admin_CleanArch";
             //var sqlConection = configuration.GetConnectionString("DefaultConnection");
-            var conectionString = $"Server = {server}; initial catalog = {database}; Persist Security Info = true; User ID = {user}; Password = {passowrd}; TrustServerCertificate=True;";
+            var conectionString = $"Server = {server},{port}; initial catalog = {database}; Persist Security Info = true; User ID = {user}; Password = {passowrd}; TrustServerCertificate=True;";
 
 
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(conectionString));
