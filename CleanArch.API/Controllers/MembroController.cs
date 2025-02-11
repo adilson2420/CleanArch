@@ -54,4 +54,4 @@ namespace CleanArch.API.Controllers
     }
 }
 
-// Realizar a implementação do update delete e consulta por ID, sem conexao com a internet. 
+// Realizar a implementação do update delete e consulta por ID, sem conexao com a internet.  
